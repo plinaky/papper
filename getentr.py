@@ -3,12 +3,13 @@
 import xml.etree.ElementTree as ET
 import os, sys
 import requests
+import json
 
 url = "https://api.pappers.fr/v2/entreprise"
 
 params = {
     "api_token": "201cdf0203b09bbdad02e742ecb5c1692a0f218daa484485",
-    "siren": "306486408",
+    "siren": "552030967",
     "format_publications_bodacc": "objet",
     "marques": True,
     "validite_tva_intracommunautaire": True,
@@ -20,15 +21,13 @@ reponse = requests.get(url, params)
 if reponse.status_code == 200 :
     print('reponse complete')
     print('******************************')
-    print(reponse.text)
-    print('******************************')
-    print(reponse.json)
+    myjson = json.loads(reponse.text)
+    print(json.dumps(myjson, sort_keys=False, indent=4))
 elif reponse.status_code == 206:
     print('reponse incomplete')
     print('******************************')
-    print(reponse.text)
-    print('******************************')
-    print(reponse.json)
+    myjson = json.loads(reponse.test)
+    print(json.dumps(myjson, sort_keys=False, indent=4))
 elif reponse.status_code == 400:
     print('Parametres de la requete incorrects')
 elif reponse.status_code == 401:
