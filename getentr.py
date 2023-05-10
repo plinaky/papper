@@ -4,7 +4,9 @@ import xml.etree.ElementTree as ET
 import os, sys
 import requests
 import json
+import sqlite3
 
+conn = sqlite3.connect('entr.db')
 url = "https://api.pappers.fr/v2/entreprise"
 
 params = {
@@ -39,3 +41,5 @@ elif reponse.status_code == 503:
 else :
     print("code d'erreur inconnu", reponse.status_code)
 
+
+db.close()
